@@ -49,13 +49,6 @@ public class Game {
 
 
     public void run() throws GameException {
-        _logger.debuge("Test", "Debug test message");
-        _logger.verbosee("Test", "Verbose test message");
-        _logger.infoe("Test", "Info test message.");
-        _logger.warninge("Test", "Warning test message.");
-        _logger.errore("Test", "Error test message.");
-        _logger.fatale("Test", "Fatal test message.");
-
         try {
             _initializeSubsystems();
             _initializeWindow();
