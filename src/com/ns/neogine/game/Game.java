@@ -4,6 +4,8 @@ import com.ns.neogine.exception.GameException;
 import com.ns.neogine.memory.Cleaner;
 import com.ns.neogine.subsystem.GLFW;
 import com.ns.neogine.system.Stopwatch;
+import com.ns.neogine.utils.logging.Logger;
+import com.ns.neogine.utils.logging.streams.ConsoleLoggerStream;
 import com.ns.neogine.window.Window;
 import org.lwjgl.opengl.GL;
 
@@ -17,6 +19,7 @@ import static org.lwjgl.opengl.GL45.glViewport;
 public class Game {
     private Stopwatch _stopwatch;
     private long _frame;
+    private Logger _logger;
 
     private Cleaner _cleaner;
     private Window _window;
@@ -26,6 +29,8 @@ public class Game {
     public Game(IGame ml) {
         _stopwatch = new Stopwatch();
         _frame = 0;
+        _logger = new Logger(this);
+        _logger.addStream(new ConsoleLoggerStream());
 
         _cleaner = new Cleaner();
         _main_loop = ml;
@@ -44,6 +49,13 @@ public class Game {
 
 
     public void run() throws GameException {
+        _logger.debuge("Test", "Debug test message");
+        _logger.verbosee("Test", "Verbose test message");
+        _logger.infoe("Test", "Info test message.");
+        _logger.warninge("Test", "Warning test message.");
+        _logger.errore("Test", "Error test message.");
+        _logger.fatale("Test", "Fatal test message.");
+
         try {
             _initializeSubsystems();
             _initializeWindow();
@@ -75,6 +87,8 @@ public class Game {
 
 
     private void _initializeSubsystems() throws GameException {
+        this._logger.debuge("Game", "Initializing subsystems...");
+
         try {
             _cleaner.add(new GLFW());
         } catch( Exception e ) {
@@ -83,6 +97,8 @@ public class Game {
     }
 
     private void _initializeWindow() throws GameException {
+        this._logger.debuge("Game", "Initializing windows...");
+
         try {
             _window = _cleaner.add(new Window());
 
@@ -93,6 +109,8 @@ public class Game {
     }
 
     private void _initializeContext() {
+        this._logger.debuge("Game", "Initializing OpenGL context...");
+
         _window.makeCurrent();
         GL.createCapabilities();
 

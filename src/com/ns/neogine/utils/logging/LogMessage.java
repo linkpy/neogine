@@ -7,7 +7,7 @@ public class LogMessage {
     /**
      * Time since the start of the game, in nanoseconds.
      */
-    private long _time;
+    private float _time;
     /**
      * Frame at which the message was emitted.
      */
@@ -40,7 +40,7 @@ public class LogMessage {
      * @param s Severity.
      * @param m Message.
      */
-    public LogMessage(long t, long f, String n, LogSeverity s, String m) {
+    public LogMessage(float t, long f, String n, LogSeverity s, String m) {
         _time = t;
         _frame = f;
         _emitter_name = n;
@@ -56,7 +56,7 @@ public class LogMessage {
     /**
      * Gets the time at which the message was emitted.
      */
-    public long getTime() {
+    public float getTime() {
         return _time;
     }
 
